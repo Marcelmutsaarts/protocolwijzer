@@ -119,6 +119,11 @@ aside h4{margin:0 0 10px;font-size:13px;letter-spacing:.08em;text-transform:uppe
 .modal.open{display:flex}
 .mc{background:#fff;border-radius:22px;max-width:560px;width:100%;padding:26px 28px;max-height:100%;overflow:auto}
 .mc h2{margin:0 0 8px;font-size:24px}
+.whoh{display:flex;gap:14px;align-items:center;margin-bottom:6px}.whoh .av{width:56px;height:56px;border-radius:16px;display:grid;place-items:center;font-size:28px;background:var(--blue2)}
+.whoh h2{margin:0}.whoh p{margin:2px 0 0;color:var(--muted);font-size:14px}
+.call{display:flex;align-items:center;justify-content:center;gap:10px;background:var(--ok);color:#fff;text-decoration:none;border-radius:16px;padding:15px;font-weight:800;font-size:19px;margin:14px 0 6px}
+.whof label{display:block;font-size:13px;font-weight:700;color:var(--muted);margin-top:12px}
+.whof input{width:100%;border:2px solid var(--line);border-radius:12px;padding:10px 12px;font-size:16px;outline:0;margin-top:4px}.whof input:focus{border-color:var(--blue)}
 .mc p,.mc li{line-height:1.55;font-size:15px}
 @media (max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}.flow{grid-template-columns:1fr}.people{grid-template-columns:1fr}.hero h2{font-size:28px}header p{display:none}}
 @media (max-width:520px){.grid{grid-template-columns:1fr}.hb .t{display:none}}
@@ -134,6 +139,7 @@ aside h4{margin:0 0 10px;font-size:13px;letter-spacing:.08em;text-transform:uppe
 <div class="alarm"><div class="wrap">🚨 Direct gevaar voor iemands leven of veiligheid? Bel <a href="tel:112">112</a> en daarna de schoolleiding.</div></div>
 <main id="main"></main>
 <div id="toast"></div>
+<div class="modal" id="who"><div class="mc" id="whoBody"></div></div>
 <div class="modal" id="info"><div class="mc">
   <h2>Over deze protocolwijzer</h2>
   <p>Protocollen staan vaak in een map of op het intranet, en juist op het moment dat je ze nodig hebt, weet niemand waar. Deze app maakt ze klikbaar: één vraag tegelijk, met wat je doet, wie je belt en binnen welke termijn.</p>
@@ -159,7 +165,7 @@ const CONTACTS={
   alarm:{r:'Alarmnummer',ic:'🚨',d:'Bij direct gevaar voor leven of veiligheid.',tel:'112',fixed:true},
   directie:{r:'Schoolleiding / directie',ic:'🏫',d:'Bij ernstige incidenten altijd dezelfde dag.'},
   teamleider:{r:'Teamleider / afdelingsleider',ic:'🧭',d:'Eerste aanspreekpunt voor jou als medewerker.'},
-  mentor:{r:'Mentor van de leerling',ic:'🧑‍🏫',d:'Staat in het leerlingvolgsysteem.'},
+  mentor:{r:'Mentor van de leerling',ic:'🧑‍🏫',d:'Verschilt per leerling: je vindt de mentor en het nummer in het leerlingvolgsysteem.',fixed:true},
   zorg:{r:'Zorgcoördinator',ic:'🤝',d:'Coördineert extra ondersteuning en zorg rond leerlingen.'},
   aandacht:{r:'Aandachtsfunctionaris meldcode',ic:'🛡️',d:'Begeleidt de stappen van de meldcode huiselijk geweld en kindermishandeling.'},
   vertrouwens:{r:'Vertrouwenspersoon',ic:'💬',d:'Voor leerlingen en medewerkers, vertrouwelijk.'},
@@ -244,7 +250,7 @@ const main=$('#main');
 function toast(t){const e=$('#toast');e.textContent=t;e.classList.add('on');clearTimeout(toast.h);toast.h=setTimeout(()=>e.classList.remove('on'),2200);}
 function tel(n){return 'tel:'+n.replace(/[^0-9+]/g,'');}
 function contactLine(id,hl){const c=CONTACTS[id];if(!c)return '';const p=people[id]||{};const nm=p.name;const t=c.tel||p.tel;
-  return `<div class="ct ${hl?'hl':''}"><div class="av">${c.ic}</div><div><b>${esc(c.r)}</b><span>${nm?esc(nm):esc(c.d)}</span>${t?`<a class="tel" href="${tel(t)}">📞 ${esc(t)}</a>`:(c.fixed?'':`<span style="font-size:12px">Nog geen naam ingevuld · <a href="#" data-people>invullen</a></span>`)}</div></div>`;}
+  return `<div class="ct ${hl?'hl':''}" data-ct="${id}" style="cursor:pointer" title="Klik voor contactgegevens"><div class="av">${c.ic}</div><div><b>${esc(c.r)}</b><span>${nm?esc(nm):esc(c.d)}</span>${t?`<a class="tel" href="${tel(t)}">📞 ${esc(t)}</a>`:(c.fixed?'':`<span style="font-size:12px">Nog geen naam ingevuld · <a href="#" data-fill="${id}">invullen</a></span>`)}</div></div>`;}
 
 /* ---------- home ---------- */
 function setHash(h){try{history.replaceState(null,'',h?'#'+h:location.pathname+location.search);}catch(e){}}
@@ -287,7 +293,7 @@ function render(){const p=cur;const nid=hist[hist.length-1];const n=p.n[nid];
       <div class="box"><h4>Tip</h4><span class="small" style="margin:0;display:block">Twijfel je? Overleg altijd met je teamleider. Je hoeft lastige situaties nooit alleen op te lossen.</span></div></aside></div>`;
   $('#back').onclick=back;$$('[data-go]').forEach(b=>b.onclick=()=>go(b.dataset.go));
   $$('.todo li').forEach(li=>li.onclick=()=>{checks[li.dataset.c]=!checks[li.dataset.c];render();});
-  $$('[data-who]').forEach(b=>b.onclick=()=>{const c=CONTACTS[b.dataset.who],pp=people[b.dataset.who]||{};const t=c.tel||pp.tel;toast(`${c.r}${pp.name?': '+pp.name:''}${t?' · '+t:''}`);});
+  $$('[data-who]').forEach(b=>b.onclick=()=>openWho(b.dataset.who));
   const nt=$('#note');if(nt)nt.oninput=()=>{note=nt.value;};
   const cp=$('#copy');if(cp)cp.onclick=()=>{const txt=`${p.t} — ${new Date().toLocaleString('nl-NL')}\n\n`+hist.filter(h=>p.n[h].k!=='end').map(h=>{const x=p.n[h];if(x.k==='q'){const nx=hist[hist.indexOf(h)+1];const o=(x.opts||[{l:'Ja',go:x.yes},{l:'Nee',go:x.no}]).find(o=>o.go===nx);return `• ${x.t} ${o?o.l:''}`;}
       return `• ${x.t}\n`+x.steps.map((s,i)=>`   [${checks[h+i]?'x':' '}] ${s.replace(/<[^>]+>/g,'')}`).join('\n');}).join('\n')+(note?`\n\nNotitie:\n${note}`:'');
@@ -295,18 +301,29 @@ function render(){const p=cur;const nid=hist[hist.length-1];const n=p.n[nid];
   const pr=$('#print');if(pr)pr.onclick=()=>window.print();const ag=$('#again');if(ag)ag.onclick=()=>home();
   bindPeople();}
 
+/* ---------- contactkaartje ---------- */
+function openWho(id){const c=CONTACTS[id];if(!c)return;const p=people[id]||{};const t=c.tel||p.tel;
+  $('#whoBody').innerHTML=`<div class="whoh"><div class="av">${c.ic}</div><div><h2>${esc(p.name||c.r)}</h2><p>${p.name?esc(c.r)+' · ':''}${esc(c.d)}</p></div></div>
+    ${t?`<a class="call" href="${tel(t)}">📞 Bel ${esc(t)}</a>`:(c.fixed?'':'<p class="small">Er is nog geen telefoonnummer ingevuld.</p>')}
+    ${c.fixed?'':`<div class="whof"><label>Naam bij jullie school<input id="wName" value="${esc(p.name||'')}" placeholder="Bijvoorbeeld: Sanne de Vries"></label><label>Telefoon of toestel<input id="wTel" value="${esc(p.tel||'')}" placeholder="Bijvoorbeeld: 0412-123456 of toestel 214"></label><p class="small">Wordt alleen in deze browser bewaard.</p></div>`}
+    <div class="row"><button class="btn pri" id="wOk">${c.fixed?'Sluiten':'Opslaan'}</button>${c.fixed?'':'<button class="btn" id="wX">Annuleren</button>'}</div>`;
+  $('#who').classList.add('open');
+  $('#wOk').onclick=()=>{if(!c.fixed){people[id]={name:$('#wName').value.trim(),tel:$('#wTel').value.trim()};store.set('pw-people',people);toast('Opgeslagen');}$('#who').classList.remove('open');if(cur)render();};
+  const x=$('#wX');if(x)x.onclick=()=>$('#who').classList.remove('open');}
+$('#who').onclick=e=>{if(e.target.id==='who')$('#who').classList.remove('open');};
+
 /* ---------- wie is wie ---------- */
 function peoplePage(){cur=null;setHash('wie');main.innerHTML=`<div class="wrap"><section class="hero"><h2>Wie is wie</h2><p>Vul de namen en nummers van jullie school in. Ze worden alleen in deze browser bewaard en verschijnen daarna in elk protocol.</p></section>
   <div class="people">${Object.entries(CONTACTS).map(([id,c])=>{const p=people[id]||{};return `<div class="person"><div class="av">${c.ic}</div><div><b>${esc(c.r)}</b><p>${esc(c.d)}</p>${c.fixed?`<span class="fixed">📞 ${esc(c.tel)}</span>`:`<input data-id="${id}" data-f="name" placeholder="Naam" value="${esc(p.name||'')}" aria-label="Naam ${esc(c.r)}"><input data-id="${id}" data-f="tel" placeholder="Telefoon of toestel" value="${esc(p.tel||'')}" aria-label="Telefoon ${esc(c.r)}">`}</div></div>`;}).join('')}</div>
   <p class="foot"><button class="btn pri" id="pDone">Klaar</button></p></div>`;
   $$('.person input').forEach(i=>i.oninput=()=>{const id=i.dataset.id;people[id]=people[id]||{};people[id][i.dataset.f]=i.value.trim();store.set('pw-people',people);});
   $('#pDone').onclick=()=>{toast('Opgeslagen');home();};}
-function bindPeople(){$$('[data-people]').forEach(a=>a.onclick=e=>{e.preventDefault();peoplePage();});}
+function bindPeople(){$$('[data-ct]').forEach(d=>d.onclick=e=>{if(e.target.closest('a.tel'))return;e.preventDefault();openWho(d.dataset.ct);});$$('[data-people]').forEach(a=>a.onclick=e=>{e.preventDefault();peoplePage();});}
 
 $('#home').onclick=()=>home();$('#bPeople').onclick=peoplePage;
 $('#bInfo').onclick=()=>$('#info').classList.add('open');$('#infoClose').onclick=()=>$('#info').classList.remove('open');
 $('#info').onclick=e=>{if(e.target.id==='info')$('#info').classList.remove('open');};
-addEventListener('keydown',e=>{if(e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA')return;if(e.key==='Escape'){$('#info').classList.remove('open');}
+addEventListener('keydown',e=>{if(e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA')return;if(e.key==='Escape'){$('#info').classList.remove('open');$('#who').classList.remove('open');}
   if(cur){const n=cur.n[hist[hist.length-1]];if(n.k==='q'){const opts=n.opts||[{go:n.yes},{go:n.no}];const k=+e.key;if(k>=1&&k<=opts.length)go(opts[k-1].go);}else if(n.k==='do'&&e.key==='Enter')go(n.next);if(e.key==='Backspace')back();}});
 const h=location.hash.slice(1);if(h==='wie')peoplePage();else if(PROTOCOLS.some(p=>p.id===h))start(h);else home();
 window.__pw={start,go,home,get hist(){return hist;}};

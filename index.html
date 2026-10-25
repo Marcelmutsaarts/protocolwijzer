@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Wat doe ik als…? · Protocolwijzer</title>
+<meta name="description" content="Protocolwijzer voor het schoolteam: klik stap voor stap door wat je doet, wie je belt en binnen welke termijn. Voorbeeld voor het voortgezet onderwijs.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#18223b;--muted:#5f6880;--bg:#f4f6fb;--card:#fff;--line:#e2e6f0;--blue:#2457d6;--blue2:#e8eefc;--coral:#ff6a4d;--red:#d93a2b;--red2:#fdeceb;--ok:#1f9d63;--ok2:#e4f5ec;--amber:#c97a00;--amber2:#fff4dc;--r:18px}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:Figtree,system-ui,sans-serif;font-size:16px;-webkit-font-smoothing:antialiased}
+button,input,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+a{color:var(--blue)}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+header{background:var(--ink);color:#fff}
+header .wrap{display:flex;align-items:center;gap:14px;padding-top:16px;padding-bottom:16px}
+.mark{width:40px;height:40px;border-radius:12px;background:var(--coral);display:grid;place-items:center;font-weight:800;font-size:22px}
+header h1{margin:0;font-size:21px;font-weight:800;letter-spacing:-.01em;cursor:pointer}
+header p{margin:0;font-size:13px;color:#b9c0d4}
+header nav{margin-left:auto;display:flex;gap:8px}
+.hb{border:1.5px solid rgba(255,255,255,.25);background:none;color:#fff;border-radius:11px;padding:8px 13px;font-weight:700;font-size:14px}
+.hb:hover{background:rgba(255,255,255,.1)}
+.alarm{background:var(--red);color:#fff}
+.alarm .wrap{display:flex;align-items:center;gap:12px;padding-top:10px;padding-bottom:10px;font-weight:700;font-size:15px}
+.alarm a{color:#fff;background:rgba(255,255,255,.18);border-radius:9px;padding:3px 10px;text-decoration:none}
+
+/* home */
+.hero{padding:34px 0 18px}
+.hero h2{margin:0 0 6px;font-size:36px;font-weight:800;letter-spacing:-.02em}
+.hero p{margin:0 0 18px;color:var(--muted);font-size:17px}
+.search{display:flex;align-items:center;gap:10px;background:#fff;border:2px solid var(--line);border-radius:16px;padding:12px 16px;max-width:640px}
+.search:focus-within{border-color:var(--blue)}
+.search input{border:0;outline:0;flex:1;font-size:17px;background:none}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;padding:12px 0 30px}
+.tile{background:#fff;border:2px solid transparent;border-radius:var(--r);padding:18px;text-align:left;display:flex;flex-direction:column;gap:8px;min-height:168px;box-shadow:0 1px 0 rgba(24,34,59,.06);transition:transform .15s,border-color .15s}
+.tile:hover{transform:translateY(-2px);border-color:var(--c)}
+.tile .ic{width:46px;height:46px;border-radius:13px;display:grid;place-items:center;font-size:24px;background:var(--cbg)}
+.tile b{font-size:17px;line-height:1.25}
+.tile span{font-size:13.5px;color:var(--muted);line-height:1.4}
+.tile .tag{margin-top:auto;font-size:12px;font-weight:700;color:var(--c)}
+.none{color:var(--muted);padding:20px 0}
+.foot{color:var(--muted);font-size:13px;padding:6px 0 40px;line-height:1.5}
+
+/* flow */
+.flow{display:grid;grid-template-columns:1fr 320px;gap:20px;padding:24px 0 40px;align-items:start}
+.crumbs{display:flex;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+.back{border:0;background:#fff;border-radius:11px;padding:8px 12px;font-weight:700;font-size:14px;color:var(--ink);box-shadow:0 1px 0 rgba(24,34,59,.08)}
+.ptitle{display:flex;align-items:center;gap:12px;margin-bottom:6px}
+.ptitle .ic{width:50px;height:50px;border-radius:14px;display:grid;place-items:center;font-size:26px}
+.ptitle h2{margin:0;font-size:28px;font-weight:800;letter-spacing:-.01em}
+.path{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0 16px}
+.path span{font-size:12.5px;background:#fff;border-radius:999px;padding:4px 10px;color:var(--muted);font-weight:600}
+.path span.cur{background:var(--ink);color:#fff}
+.step{background:#fff;border-radius:22px;padding:24px 26px;box-shadow:0 2px 0 rgba(24,34,59,.05);animation:in .3s ease}
+@keyframes in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.step .kind{font-size:12.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--blue);margin-bottom:6px}
+.step.q .kind{color:var(--coral)}
+.step h3{margin:0 0 8px;font-size:24px;line-height:1.25;font-weight:800}
+.step .help{margin:0 0 14px;color:var(--muted);font-size:15.5px;line-height:1.5}
+.answers{display:flex;flex-direction:column;gap:10px;margin-top:16px}
+.ans{border:2px solid var(--line);background:#fff;border-radius:16px;padding:15px 18px;text-align:left;font-weight:700;font-size:17px;display:flex;align-items:center;gap:12px;transition:all .15s}
+.ans:hover{border-color:var(--blue);background:var(--blue2)}
+.ans .k{width:28px;height:28px;border-radius:9px;background:var(--blue2);color:var(--blue);display:grid;place-items:center;font-size:14px;flex:none}
+.ans.yes:hover{border-color:var(--red);background:var(--red2)}
+.todo{list-style:none;margin:6px 0 0;padding:0;display:flex;flex-direction:column;gap:8px}
+.todo li{display:flex;gap:12px;align-items:flex-start;background:var(--bg);border-radius:14px;padding:12px 14px;cursor:pointer;line-height:1.45;font-size:16px;transition:background .15s}
+.todo li .cb{width:24px;height:24px;border-radius:8px;border:2px solid #b8c0d6;flex:none;display:grid;place-items:center;color:#fff;font-weight:800;font-size:14px;margin-top:1px;background:#fff}
+.todo li.done{background:var(--ok2)}
+.todo li.done .cb{background:var(--ok);border-color:var(--ok)}
+.todo li.done span{color:#41644f}
+.todo li b{font-weight:800}
+.meta{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0 4px}
+.chip{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:6px 12px;font-size:13.5px;font-weight:700;border:0}
+.chip.term{background:var(--amber2);color:var(--amber)}
+.chip.who{background:var(--blue2);color:var(--blue)}
+.chip.who:hover{background:var(--blue);color:#fff}
+.warn{background:var(--red2);color:#8f2016;border-radius:14px;padding:12px 14px;font-weight:600;font-size:15px;line-height:1.45;margin:4px 0 12px}
+.next{margin-top:18px;width:100%;border:0;background:var(--ink);color:#fff;border-radius:16px;padding:15px;font-weight:800;font-size:17px}
+.next:hover{background:#26335a}
+.endc{text-align:left}
+.endc .big{font-size:44px}
+.summary{background:var(--bg);border-radius:14px;padding:14px 16px;font-size:14.5px;line-height:1.55;margin:12px 0}
+.summary ol{margin:6px 0 0;padding-left:20px}
+textarea{width:100%;min-height:110px;border:2px solid var(--line);border-radius:14px;padding:12px;font-size:15px;resize:vertical;outline:0}
+textarea:focus{border-color:var(--blue)}
+.row{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+.btn{border:2px solid var(--ink);background:#fff;border-radius:13px;padding:10px 16px;font-weight:800;font-size:15px}
+.btn.pri{background:var(--ink);color:#fff}
+.small{font-size:13px;color:var(--muted);line-height:1.45;margin-top:8px}
+
+/* zijpaneel */
+aside .box{background:#fff;border-radius:20px;padding:18px;margin-bottom:14px}
+aside h4{margin:0 0 10px;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.ct{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-top:1px solid var(--line)}
+.ct:first-of-type{border-top:0}
+.ct .av{width:36px;height:36px;border-radius:11px;display:grid;place-items:center;font-size:18px;background:var(--blue2);flex:none}
+.ct b{display:block;font-size:15px}
+.ct span{display:block;font-size:13px;color:var(--muted);line-height:1.4}
+.ct a.tel{display:inline-block;margin-top:3px;font-weight:800;text-decoration:none;font-size:14px}
+.ct.hl{background:var(--blue2);border-radius:12px;padding:10px;border-top:0;margin-top:4px}
+.prog{height:8px;border-radius:9px;background:var(--line);overflow:hidden;margin-top:6px}.prog i{display:block;height:100%;background:var(--ok);transition:width .3s}
+
+/* wie is wie */
+.people{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;padding:20px 0 40px}
+.person{background:#fff;border-radius:18px;padding:16px;display:grid;grid-template-columns:44px 1fr;gap:12px}
+.person .av{width:44px;height:44px;border-radius:13px;display:grid;place-items:center;font-size:22px;background:var(--blue2)}
+.person b{font-size:16px}
+.person p{margin:2px 0 8px;font-size:13.5px;color:var(--muted);line-height:1.4}
+.person input{width:100%;border:1.5px solid var(--line);border-radius:10px;padding:7px 10px;font-size:14px;margin-top:5px;outline:0}
+.person input:focus{border-color:var(--blue)}
+.person .fixed{font-weight:800;color:var(--blue)}
+#toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);background:var(--ink);color:#fff;border-radius:13px;padding:11px 18px;font-weight:700;opacity:0;transition:all .3s;pointer-events:none;z-index:20}
+#toast.on{opacity:1;transform:translateX(-50%)}
+.modal{position:fixed;inset:0;background:rgba(24,34,59,.45);display:none;align-items:center;justify-content:center;padding:20px;z-index:30}
+.modal.open{display:flex}
+.mc{background:#fff;border-radius:22px;max-width:560px;width:100%;padding:26px 28px;max-height:100%;overflow:auto}
+.mc h2{margin:0 0 8px;font-size:24px}
+.mc p,.mc li{line-height:1.55;font-size:15px}
+@media (max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}.flow{grid-template-columns:1fr}.people{grid-template-columns:1fr}.hero h2{font-size:28px}header p{display:none}}
+@media (max-width:520px){.grid{grid-template-columns:1fr}.hb .t{display:none}}
+@media print{header nav,.alarm,aside,.back,.row,.next,textarea{display:none!important}body{background:#fff}.flow{grid-template-columns:1fr}.step{box-shadow:none}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <div class="mark">?</div>
+  <div><h1 id="home">Wat doe ik als…?</h1><p>Protocolwijzer voor het team · voorbeeld voor het voortgezet onderwijs</p></div>
+  <nav><button class="hb" id="bPeople">👥 <span class="t">Wie is wie</span></button><button class="hb" id="bInfo">ⓘ <span class="t">Over</span></button></nav>
+</div></header>
+<div class="alarm"><div class="wrap">🚨 Direct gevaar voor iemands leven of veiligheid? Bel <a href="tel:112">112</a> en daarna de schoolleiding.</div></div>
+<main id="main"></main>
+<div id="toast"></div>
+<div class="modal" id="info"><div class="mc">
+  <h2>Over deze protocolwijzer</h2>
+  <p>Protocollen staan vaak in een map of op het intranet, en juist op het moment dat je ze nodig hebt, weet niemand waar. Deze app maakt ze klikbaar: één vraag tegelijk, met wat je doet, wie je belt en binnen welke termijn.</p>
+  <ul>
+    <li><b>Dit is een voorbeeld.</b> De stappen volgen gangbare landelijke afspraken (zoals de meldcode en de verzuimmelding), maar elke school heeft eigen protocollen. Vervang ze door die van jullie school.</li>
+    <li>Vul bij <b>Wie is wie</b> de namen en nummers van jullie school in. Die worden alleen in deze browser bewaard.</li>
+    <li>Er wordt niets naar een server gestuurd. Notities verdwijnen als je de pagina sluit: leg ze vast in jullie eigen systeem.</li>
+  </ul>
+  <p class="small">Gebouwd als voorbeeld voor een vibecode-workshop door AI voor Docenten. Alles staat in één HTML-bestand; de protocollen staan bovenaan in de code, zodat je ze makkelijk kunt aanpassen.</p>
+  <div class="row"><button class="btn pri" id="infoClose">Sluiten</button></div>
+</div></div>
+
+<script>
+/* =====================================================================
+   PAS HIER JE EIGEN SCHOOL AAN
+   - CONTACTS: de rollen en (vaste) nummers. Namen vult het team in via "Wie is wie".
+   - PROTOCOLS: elke situatie is een beslisboom van knooppunten:
+       q    = vraag met antwoorden  (yes/no, of opts:[{l,go}])
+       do   = stappen om te doen    (steps, who, term, warn, next)
+       end  = afronding
+   ===================================================================== */
+const CONTACTS={
+  alarm:{r:'Alarmnummer',ic:'🚨',d:'Bij direct gevaar voor leven of veiligheid.',tel:'112',fixed:true},
+  directie:{r:'Schoolleiding / directie',ic:'🏫',d:'Bij ernstige incidenten altijd dezelfde dag.'},
+  teamleider:{r:'Teamleider / afdelingsleider',ic:'🧭',d:'Eerste aanspreekpunt voor jou als medewerker.'},
+  mentor:{r:'Mentor van de leerling',ic:'🧑‍🏫',d:'Staat in het leerlingvolgsysteem.'},
+  zorg:{r:'Zorgcoördinator',ic:'🤝',d:'Coördineert extra ondersteuning en zorg rond leerlingen.'},
+  aandacht:{r:'Aandachtsfunctionaris meldcode',ic:'🛡️',d:'Begeleidt de stappen van de meldcode huiselijk geweld en kindermishandeling.'},
+  vertrouwens:{r:'Vertrouwenspersoon',ic:'💬',d:'Voor leerlingen en medewerkers, vertrouwelijk.'},
+  pest:{r:'Anti-pestcoördinator',ic:'🧩',d:'Aanspreekpunt pesten en sociale veiligheid.'},
+  bhv:{r:'BHV / EHBO',ic:'⛑️',d:'Bedrijfshulpverleners in het gebouw.'},
+  leerplicht:{r:'Leerplichtambtenaar',ic:'📋',d:'Van de gemeente. Verzuim meld je via het verzuimloket van DUO.'},
+  veiligthuis:{r:'Veilig Thuis',ic:'🏠',d:'Advies en meldingen bij huiselijk geweld en kindermishandeling, dag en nacht bereikbaar.',tel:'0800-2000',fixed:true},
+  z113:{r:'113 Zelfmoordpreventie',ic:'💚',d:'Gratis en anoniem, voor de leerling én voor jou.',tel:'0800-0113',fixed:true},
+  politie:{r:'Politie (geen spoed)',ic:'👮',d:'Voor aangifte of advies als er geen spoed is.',tel:'0900-8844',fixed:true}};
+
+const PROTOCOLS=[
+{id:'pesten',t:'Een leerling meldt pesten',sub:'Of je ziet zelf dat een leerling buitengesloten of gepest wordt.',ic:'🧩',c:'#7a4fd6',cbg:'#efe8fc',tag:'Sociale veiligheid',kw:'pesten buitensluiten gepest uitschelden sociale veiligheid online',start:'a',n:{
+ a:{k:'do',t:'Luister eerst en neem het serieus',steps:['Bedank de leerling dat hij of zij het je vertelt.','Laat de leerling in eigen woorden vertellen. Vraag door: wie, wat, waar en sinds wanneer?','<b>Beloof geen geheimhouding.</b> Zeg wel dat je het alleen deelt met wie kan helpen.','Vraag wat de leerling nu nodig heeft om zich veilig te voelen.','Noteer feitelijk wat je hoort, met datum.'],next:'b'},
+ b:{k:'q',t:'Is er direct gevaar of fysiek geweld?',help:'Denk aan bedreiging, letsel of een leerling die niet veilig naar huis durft.',yes:'c',no:'d'},
+ c:{k:'do',t:'Zorg eerst voor veiligheid',steps:['Haal de leerling uit de situatie en laat hem of haar niet alleen.','Schakel direct je teamleider in.','Bij letsel of ernstige bedreiging: bel 112 of de politie.','Informeer de ouders vandaag nog.'],who:['teamleider','alarm'],term:'Direct',next:'e'},
+ d:{k:'q',t:'Gaat het om herhaald gedrag of om een eenmalig conflict?',help:'Bij pesten gaat het om herhaling en een machtsverschil. Een ruzie is eenmalig en gelijkwaardig.',opts:[{l:'Herhaald, met een machtsverschil (pesten)',go:'e'},{l:'Eenmalig conflict of ruzie',go:'f'},{l:'Weet ik nog niet',go:'e'}]},
+ e:{k:'do',t:'Start de route pesten',steps:['Meld het bij de mentor en de anti-pestcoördinator.','Leg het vast in het leerlingvolgsysteem.','De mentor voert gesprekken met de gepeste leerling, de pester(s) en de meelopers, apart van elkaar.','Informeer de ouders van de betrokken leerlingen.','Plan een vervolggesprek: blijft het gestopt?'],who:['mentor','pest'],term:'Binnen 1 werkdag melden · vervolg binnen 2 weken',next:'g'},
+ f:{k:'do',t:'Bespreek en herstel',steps:['Breng de betrokkenen samen in een kort, rustig gesprek.','Maak een concrete herstelafspraak.','Informeer de mentor.','Check na een week of het goed gaat.'],who:['mentor'],term:'Deze week',next:'g'},
+ g:{k:'q',t:'Speelt het (ook) online?',help:'Bijvoorbeeld in een groepsapp of op sociale media.',yes:'h',no:'end'},
+ h:{k:'do',t:'Online pesten',steps:['Vraag de leerling om screenshots te bewaren. Stuur ze niet zelf door.','Gaat het om naaktbeelden? Volg dan het protocol <b>sexting</b>.','Help de leerling het te melden bij het platform.','Betrek de ouders bij het vervolg.'],warn:'Bekijk, bewaar of verstuur nooit naaktbeelden van leerlingen, ook niet als bewijs.',next:'end'},
+ end:{k:'end',t:'Je hebt gedaan wat nodig is. Houd de leerling de komende weken in het oog.'}}},
+{id:'meldcode',t:'Ik maak me zorgen over de thuissituatie',sub:'Vermoeden van huiselijk geweld of kindermishandeling.',ic:'🛡️',c:'#d93a2b',cbg:'#fdeceb',tag:'Meldcode',kw:'meldcode huiselijk geweld kindermishandeling thuis zorgen veilig thuis verwaarlozing',start:'a',n:{
+ a:{k:'q',t:'Is er acuut gevaar voor de leerling?',help:'Bijvoorbeeld: de leerling durft niet naar huis, heeft ernstig letsel of vertelt over direct gevaar.',yes:'b',no:'c'},
+ b:{k:'do',t:'Acuut: handel direct',steps:['Laat de leerling niet alleen.','Bel direct de aandachtsfunctionaris en de schoolleiding.','Bel Veilig Thuis (dag en nacht bereikbaar). Bij direct levensgevaar: 112.','Noteer wat je hebt gezien en gehoord.'],who:['aandacht','directie','veiligthuis','alarm'],term:'Nu',next:'end'},
+ c:{k:'do',t:'Stap 1 · Signalen in kaart brengen',steps:['Noteer feitelijk wat je ziet en hoort, met datum. Schrijf uitspraken van de leerling letterlijk op.','Ga niet zelf onderzoeken of doorvragen als een rechercheur.','<b>Beloof de leerling geen geheimhouding.</b> Zeg dat je het bespreekt met iemand die kan helpen.'],term:'Vandaag',next:'d'},
+ d:{k:'do',t:'Stap 2 · Overleggen',steps:['Bespreek je zorgen met de aandachtsfunctionaris.','Samen kun je (ook anoniem) advies vragen bij Veilig Thuis.','Je hoeft dit niet alleen te dragen of te beslissen.'],who:['aandacht','veiligthuis'],term:'Binnen 1–2 werkdagen',next:'e'},
+ e:{k:'do',t:'Stap 3 · Gesprek met leerling en ouders',steps:['De aandachtsfunctionaris bepaalt wie het gesprek voert en wanneer.','Een gesprek met de ouders volgt, tenzij dat de veiligheid van de leerling of anderen in gevaar brengt.'],who:['aandacht','zorg'],next:'f'},
+ f:{k:'do',t:'Stap 4 en 5 · Wegen en beslissen',steps:['De aandachtsfunctionaris weegt het geweld of de mishandeling met het afwegingskader.','Er wordt besloten of een melding bij Veilig Thuis nodig is en welke hulp de school organiseert.','Vraag terug wat er besloten is: jij blijft de leerling in de klas zien.'],who:['aandacht'],next:'end'},
+ end:{k:'end',t:'De meldcode is in gang gezet. Blijf signalen noteren en doorgeven.'}}},
+{id:'ongeval',t:'Er gebeurt een ongeval',sub:'Een leerling of collega raakt gewond, op school of tijdens een excursie.',ic:'⛑️',c:'#e2582f',cbg:'#fdeee8',tag:'Veiligheid',kw:'ongeval ongeluk gewond letsel ehbo bhv excursie gym sport ambulance',start:'a',n:{
+ a:{k:'q',t:'Is iemand ernstig gewond of in levensgevaar?',help:'Bewusteloos, ernstige bloeding, hoofdletsel, benauwdheid: twijfel je, dan is het antwoord ja.',yes:'b',no:'c'},
+ b:{k:'do',t:'Bel 112 en roep BHV',steps:['Bel 112 of laat iemand bellen.','Roep de BHV erbij.','Blijf bij het slachtoffer.','Laat iemand de ambulance opvangen bij de ingang.','Houd andere leerlingen op afstand en laat een collega hen opvangen.'],who:['alarm','bhv','directie'],term:'Nu',next:'d'},
+ c:{k:'do',t:'Eerste hulp',steps:['Laat de BHV of EHBO kijken.','Bepaal of de leerling naar huis of naar de huisarts moet.','Bel de ouders.'],who:['bhv'],term:'Direct',next:'d'},
+ d:{k:'q',t:'Gebeurde het buiten school?',help:'Bijvoorbeeld tijdens een excursie, schoolreis, stage of sportdag.',yes:'e',no:'f'},
+ e:{k:'do',t:'Buiten school',steps:['De reisleider coördineert. Houd de groep bij elkaar en tel de leerlingen.','Bel de contactpersoon op school.','Noteer de plaats en het tijdstip en wie erbij waren.'],who:['teamleider'],next:'f'},
+ f:{k:'do',t:'Afhandeling',steps:['De ouders zijn vandaag geïnformeerd.','Registreer het ongeval in de ongevallen- of incidentenregistratie van school.','Informeer bij een ernstig ongeval de schoolleiding: die bepaalt wie er verder geïnformeerd moet worden.','Zorg voor nazorg voor het slachtoffer, de getuigen en jezelf.'],who:['directie'],term:'Vandaag',next:'end'},
+ end:{k:'end',t:'Afgerond. Plan een korte evaluatie: wat kan beter of veiliger?'}}},
+{id:'klacht',t:'Een ouder heeft een klacht',sub:'Aan de telefoon, per mail of bij de deur.',ic:'📞',c:'#2457d6',cbg:'#e8eefc',tag:'Ouders',kw:'klacht ouder ouders boos ontevreden mail telefoon gesprek klachtenregeling',start:'a',n:{
+ a:{k:'do',t:'Luister eerst',steps:['Laat de ouder uitpraten en vat samen wat je hoort.','Toon begrip voor de zorg, zonder meteen schuld te erkennen.','Doe geen toezeggingen namens anderen.','Is de ouder boos? Stel een gesprek op een later moment voor.','Noteer de kern van de klacht.'],next:'b'},
+ b:{k:'q',t:'Gaat de klacht over jou of je eigen les?',yes:'c',no:'d'},
+ c:{k:'do',t:'Los het samen op',steps:['Plan een gesprek met de ouder.','Zoek samen naar een oplossing die past bij het belang van de leerling.','Informeer je teamleider kort.'],who:['teamleider'],term:'Gesprek binnen 5 werkdagen',next:'e'},
+ d:{k:'do',t:'Breng het bij de juiste persoon',steps:['Zorg dat de betrokken collega of de mentor het weet.','Laat de ouder weten wie contact opneemt en wanneer.'],who:['mentor','teamleider'],term:'Binnen 2 werkdagen',next:'e'},
+ e:{k:'q',t:'Is de ouder na het gesprek nog niet tevreden?',yes:'f',no:'end'},
+ f:{k:'do',t:'Opschalen',steps:['Bespreek het met de teamleider of afdelingsleider.','Daarna kan de ouder terecht bij de schoolleiding.','Lukt het dan nog niet, dan geldt de formele klachtenregeling van het schoolbestuur.'],who:['teamleider','directie'],next:'end'},
+ end:{k:'end',t:'Afgerond. Een goed gesprek voorkomt de meeste formele klachten.'}}},
+{id:'verzuim',t:'Een leerling is afwezig of verzuimt veel',sub:'Ongeoorloofd verzuim, spijbelen of veel ziekmeldingen.',ic:'📋',c:'#0f8f8a',cbg:'#e2f5f4',tag:'Verzuim',kw:'verzuim afwezig spijbelen ziek ziekmelding leerplicht duo te laat',start:'a',n:{
+ a:{k:'q',t:'Is de leerling afwezig zonder bericht van de ouders?',yes:'b',no:'c'},
+ b:{k:'do',t:'Onbekende afwezigheid',steps:['Registreer de afwezigheid in het leerlingvolgsysteem.','Bel de ouders dezelfde dag.','Zijn de ouders niet bereikbaar? Schakel de mentor of teamleider in.','Zorgen over de veiligheid? Volg dan het protocol <b>meldcode</b>.'],who:['mentor'],term:'Vandaag',next:'d'},
+ c:{k:'do',t:'Gemelde afwezigheid',steps:['Registreer de afwezigheid.','Veel of langdurig ziekteverzuim? Bespreek het met de mentor en de zorgcoördinator, bijvoorbeeld voor een gesprek met de jeugdarts.'],who:['mentor','zorg'],next:'d'},
+ d:{k:'q',t:'Is er 16 uur of meer ongeoorloofd verzuim in 4 aaneengesloten lesweken?',help:'Dit geldt voor leerplichtige en kwalificatieplichtige leerlingen.',yes:'e',no:'f'},
+ e:{k:'do',t:'Verplicht melden',steps:['De school meldt het verzuim bij de leerplichtambtenaar via het verzuimloket van DUO. Dit is wettelijk verplicht.','Informeer de ouders over de melding.','De leerplichtambtenaar neemt contact op met leerling en ouders.'],who:['leerplicht','teamleider'],term:'Direct melden',next:'end'},
+ f:{k:'do',t:'Voorkom erger',steps:['De mentor bespreekt het verzuim met de leerling en de ouders.','Zoek naar de oorzaak: gaat het om motivatie, problemen thuis of op school?','Maak afspraken en volg die.'],who:['mentor'],next:'end'},
+ end:{k:'end',t:'Afgerond. Verzuim is vaak een signaal: blijf in gesprek.'}}},
+{id:'sexting',t:'Naaktbeelden van een leerling gaan rond',sub:'Sexting, sextortion of het doorsturen van beelden.',ic:'📱',c:'#c2337a',cbg:'#fce8f2',tag:'Online veiligheid',kw:'sexting naaktfoto naaktbeelden foto video sextortion chantage afpersing online',start:'a',n:{
+ a:{k:'do',t:'Eerst: rustig en zonder oordeel',steps:['Blijf rustig. Geef de leerling geen schuld.','<b>Bekijk, kopieer of stuur de beelden niet door</b>, ook niet naar collega\'s of naar jezelf.','Noteer wat de leerling vertelt: wie, wat, sinds wanneer en waar het rondgaat.'],warn:'Het bezitten of verspreiden van naaktbeelden van minderjarigen is strafbaar, ook voor volwassenen die het "als bewijs" bewaren.',next:'b'},
+ b:{k:'q',t:'Wordt de leerling bedreigd of afgeperst, of is er sprake van misbruik?',yes:'c',no:'d'},
+ c:{k:'do',t:'Schakel hulp in',steps:['Schakel direct de teamleider en de vertrouwenspersoon in.','Neem contact op met de politie voor advies of aangifte.','Informeer de ouders in overleg met de leerling.','Ga niet in op eisen van de afperser.'],who:['teamleider','vertrouwens','politie'],term:'Vandaag',next:'d'},
+ d:{k:'do',t:'Beperk de schade',steps:['Help de leerling de beelden te melden bij het platform, zodat die offline gehaald worden.','Wijs op Helpwanted.nl voor advies over online misbruik.','Spreek leerlingen die de beelden doorsturen aan: ook doorsturen is strafbaar.','Zorg voor nazorg via de mentor of vertrouwenspersoon.'],who:['mentor','vertrouwens'],next:'end'},
+ end:{k:'end',t:'Afgerond. Houd contact: de schaamte duurt vaak langer dan de beelden.'}}},
+{id:'agressie',t:'Er is agressie of geweld',sub:'In de klas, op het plein of tegen een medewerker.',ic:'⚡',c:'#b5651d',cbg:'#fbefe3',tag:'Veiligheid',kw:'agressie geweld vechten bedreiging schelden ruzie medewerker incident',start:'a',n:{
+ a:{k:'q',t:'Is er nu fysiek gevaar?',help:'Voor jezelf, de leerling of anderen.',yes:'b',no:'c'},
+ b:{k:'do',t:'Veiligheid eerst',steps:['Breng jezelf en anderen in veiligheid.','Haal direct hulp: een collega of de teamleider.','Bij geweld of wapens: bel 112.','Grijp alleen fysiek in als dat veilig kan.'],who:['teamleider','alarm'],term:'Nu',next:'d'},
+ c:{k:'do',t:'De-escaleren',steps:['Blijf rustig, praat zacht en kort.','Geef de leerling ruimte en een time-out, op een afgesproken plek.','Stel een duidelijke grens zonder publiek.','Schakel de teamleider in.'],who:['teamleider'],next:'d'},
+ d:{k:'do',t:'Afhandeling',steps:['Registreer het incident.','Zorg voor nazorg, ook voor jezelf. Praat erover met een collega of je leidinggevende.','Bij een strafbaar feit tegen jou: je kunt aangifte doen, en de school ondersteunt je daarbij.','Informeer de ouders en plan een herstelgesprek.'],who:['teamleider','directie'],term:'Vandaag',next:'end'},
+ end:{k:'end',t:'Afgerond. Neem nazorg voor jezelf serieus.'}}},
+{id:'suicide',t:'Een leerling praat over zelfdoding',sub:'Of je hebt zorgen over uitspraken, tekeningen of berichten.',ic:'💚',c:'#1f9d63',cbg:'#e4f5ec',tag:'Welzijn',kw:'suicide zelfdoding zelfmoord dood wil niet meer somber depressie zelfbeschadiging 113',start:'a',n:{
+ a:{k:'q',t:'Is er direct gevaar?',help:'Bijvoorbeeld een concreet plan, middelen bij de hand of de leerling zegt het vandaag te gaan doen.',yes:'b',no:'c'},
+ b:{k:'do',t:'Direct gevaar',steps:['Laat de leerling niet alleen.','Bel 112.','Schakel de zorgcoördinator en de schoolleiding in.','Informeer de ouders.'],who:['alarm','zorg','directie'],term:'Nu',next:'end'},
+ c:{k:'do',t:'Neem het serieus en praat erover',steps:['Vraag er rustig en direct naar. Erover praten vergroot het risico niet.','Luister zonder oordeel en zonder meteen op te lossen.','<b>Beloof geen geheimhouding.</b> Zeg dat je hulp inschakelt omdat je om de leerling geeft.','Schakel nog dezelfde dag de zorgcoördinator in.','Wijs de leerling op 113: chatten of bellen kan gratis en anoniem.'],who:['zorg','z113'],term:'Vandaag',next:'d'},
+ d:{k:'do',t:'Vervolg',steps:['De zorgcoördinator bepaalt met jou wie de ouders informeert.','Spreek af wie de leerling de komende dagen in het oog houdt.','Zorg ook voor jezelf: 113 is er ook voor jou als begeleider.'],who:['zorg','z113'],next:'end'},
+ end:{k:'end',t:'Je hebt het goede gedaan door het serieus te nemen.'}}}];
+</script>
+<script>
+(function(){
+"use strict";
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const store={get(k){try{return JSON.parse(localStorage.getItem(k));}catch(e){return null;}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}}};
+let people=store.get('pw-people')||{};
+let cur=null,hist=[],checks={},note='';
+const main=$('#main');
+function toast(t){const e=$('#toast');e.textContent=t;e.classList.add('on');clearTimeout(toast.h);toast.h=setTimeout(()=>e.classList.remove('on'),2200);}
+function tel(n){return 'tel:'+n.replace(/[^0-9+]/g,'');}
+function contactLine(id,hl){const c=CONTACTS[id];if(!c)return '';const p=people[id]||{};const nm=p.name;const t=c.tel||p.tel;
+  return `<div class="ct ${hl?'hl':''}"><div class="av">${c.ic}</div><div><b>${esc(c.r)}</b><span>${nm?esc(nm):esc(c.d)}</span>${t?`<a class="tel" href="${tel(t)}">📞 ${esc(t)}</a>`:(c.fixed?'':`<span style="font-size:12px">Nog geen naam ingevuld · <a href="#" data-people>invullen</a></span>`)}</div></div>`;}
+
+/* ---------- home ---------- */
+function setHash(h){try{history.replaceState(null,'',h?'#'+h:location.pathname+location.search);}catch(e){}}
+function home(q){cur=null;hist=[];setHash('');const qq=(q||'').toLowerCase().trim();
+  const list=PROTOCOLS.filter(p=>!qq||(p.t+' '+p.sub+' '+p.kw+' '+p.tag).toLowerCase().includes(qq));
+  main.innerHTML=`<div class="wrap"><section class="hero"><h2>Wat is er aan de hand?</h2><p>Kies de situatie. Je krijgt stap voor stap wat je doet, wie je belt en binnen welke termijn.</p>
+    <label class="search">🔎<input id="q" placeholder="Zoek, bijvoorbeeld: pesten, ongeluk, boze ouder, spijbelen" value="${esc(q||'')}" aria-label="Zoeken"></label></section>
+    <div class="grid">${list.map(p=>`<button class="tile" data-p="${p.id}" style="--c:${p.c};--cbg:${p.cbg}"><div class="ic">${p.ic}</div><b>${esc(p.t)}</b><span>${esc(p.sub)}</span><div class="tag">${esc(p.tag)} →</div></button>`).join('')||'<div class="none">Geen protocol gevonden. Twijfel je? Overleg met je teamleider.</div>'}</div>
+    <p class="foot">Voorbeeldprotocollen op basis van gangbare landelijke afspraken. Elke school heeft eigen afspraken: vervang deze door die van jullie school en vul bij <a href="#" data-people>Wie is wie</a> de namen in.</p></div>`;
+  const qi=$('#q');qi.addEventListener('input',()=>{const v=qi.value;const pos=qi.selectionStart;home(v);const n=$('#q');n.focus();n.setSelectionRange(pos,pos);});
+  $$('.tile').forEach(b=>b.onclick=()=>start(b.dataset.p));bindPeople();}
+
+/* ---------- flow ---------- */
+function start(id){const p=PROTOCOLS.find(x=>x.id===id);if(!p)return;cur=p;hist=[p.start];checks={};note='';setHash(id);render();window.scrollTo(0,0);}
+function go(nid){hist.push(nid);render();window.scrollTo({top:0,behavior:'smooth'});}
+function back(){if(hist.length>1){hist.pop();render();}else home();}
+function nodeLabel(n){return n.k==='q'?n.t.replace(/\?$/,'?'):n.t;}
+function render(){const p=cur;const nid=hist[hist.length-1];const n=p.n[nid];
+  const whoAll=[...new Set(Object.values(p.n).flatMap(x=>x.who||[]))];const whoNow=n.who||[];
+  const doSteps=hist.filter(h=>p.n[h].k==='do');const total=doSteps.reduce((a,h)=>a+p.n[h].steps.length,0);const done=doSteps.reduce((a,h)=>a+p.n[h].steps.filter((s,i)=>checks[h+i]).length,0);
+  let body='';
+  if(n.k==='q'){const opts=n.opts||[{l:'Ja',go:n.yes,y:1},{l:'Nee',go:n.no}];
+    body=`<div class="step q"><div class="kind">Vraag</div><h3>${esc(n.t)}</h3>${n.help?`<p class="help">${esc(n.help)}</p>`:''}<div class="answers">${opts.map((o,i)=>`<button class="ans ${o.y?'yes':''}" data-go="${o.go}"><span class="k">${i+1}</span>${esc(o.l)}</button>`).join('')}</div></div>`;}
+  else if(n.k==='do'){body=`<div class="step"><div class="kind">Doe nu</div><h3>${esc(n.t)}</h3>${n.warn?`<div class="warn">⚠️ ${esc(n.warn)}</div>`:''}
+      <ul class="todo">${n.steps.map((s,i)=>`<li class="${checks[nid+i]?'done':''}" data-c="${nid+i}"><span class="cb">${checks[nid+i]?'✓':''}</span><span>${s}</span></li>`).join('')}</ul>
+      ${(n.term||whoNow.length)?`<div class="meta">${n.term?`<span class="chip term">⏱ ${esc(n.term)}</span>`:''}${whoNow.map(w=>`<button class="chip who" data-who="${w}">${CONTACTS[w].ic} ${esc(CONTACTS[w].r)}</button>`).join('')}</div>`:''}
+      <button class="next" data-go="${n.next}">${n.next==='end'?'Afronden ✓':'Volgende stap →'}</button></div>`;}
+  else{const lines=hist.filter(h=>p.n[h].k!=='end').map(h=>{const x=p.n[h];if(x.k==='q'){const nx=hist[hist.indexOf(h)+1];const o=(x.opts||[{l:'Ja',go:x.yes},{l:'Nee',go:x.no}]).find(o=>o.go===nx);return `<li>${esc(x.t)} <b>${o?esc(o.l):''}</b></li>`;}
+      return `<li>${esc(x.t)}: ${x.steps.filter((s,i)=>checks[h+i]).length} van ${x.steps.length} stappen afgevinkt</li>`;}).join('');
+    body=`<div class="step endc"><div class="big">✅</div><h3>${esc(n.t)}</h3><div class="summary"><b>Wat je hebt doorlopen</b><ol>${lines}</ol></div>
+      <label class="small" for="note"><b>Notitie om vast te leggen</b>, bijvoorbeeld feitelijk wat je zag en hoorde. Deze tekst wordt niet bewaard: kopieer hem naar jullie eigen systeem.</label>
+      <textarea id="note" placeholder="Datum en tijd: …&#10;Wat ik zag of hoorde: …&#10;Wat ik heb gedaan: …&#10;Wie ik heb ingelicht: …">${esc(note)}</textarea>
+      <div class="row"><button class="btn pri" id="copy">📋 Kopieer verslag</button><button class="btn" id="print">🖨 Afdrukken</button><button class="btn" id="again">Andere situatie</button></div></div>`;}
+  const pathHtml=hist.map((h,i)=>`<span class="${i===hist.length-1?'cur':''}">${i+1}. ${esc(p.n[h].k==='end'?'Afronden':p.n[h].t.length>34?p.n[h].t.slice(0,32)+'…':p.n[h].t)}</span>`).join('');
+  main.innerHTML=`<div class="wrap flow"><div><div class="crumbs"><button class="back" id="back">← ${hist.length>1?'Vorige stap':'Alle situaties'}</button></div>
+      <div class="ptitle"><div class="ic" style="background:${p.cbg}">${p.ic}</div><h2>${esc(p.t)}</h2></div><div class="path">${pathHtml}</div>${body}</div>
+    <aside><div class="box"><h4>Wie bel je?</h4>${(whoNow.length?whoNow:whoAll).map(w=>contactLine(w,whoNow.includes(w))).join('')||'<span class="small">Nog niemand bij deze stap.</span>'}
+        ${whoNow.length&&whoAll.some(w=>!whoNow.includes(w))?`<details><summary class="small" style="cursor:pointer">Andere contacten in dit protocol</summary>${whoAll.filter(w=>!whoNow.includes(w)).map(w=>contactLine(w)).join('')}</details>`:''}</div>
+      ${total?`<div class="box"><h4>Afgevinkt</h4><b>${done} van ${total} stappen</b><div class="prog"><i style="width:${Math.round(done/total*100)}%"></i></div></div>`:''}
+      <div class="box"><h4>Tip</h4><span class="small" style="margin:0;display:block">Twijfel je? Overleg altijd met je teamleider. Je hoeft lastige situaties nooit alleen op te lossen.</span></div></aside></div>`;
+  $('#back').onclick=back;$$('[data-go]').forEach(b=>b.onclick=()=>go(b.dataset.go));
+  $$('.todo li').forEach(li=>li.onclick=()=>{checks[li.dataset.c]=!checks[li.dataset.c];render();});
+  $$('[data-who]').forEach(b=>b.onclick=()=>{const c=CONTACTS[b.dataset.who],pp=people[b.dataset.who]||{};const t=c.tel||pp.tel;toast(`${c.r}${pp.name?': '+pp.name:''}${t?' · '+t:''}`);});
+  const nt=$('#note');if(nt)nt.oninput=()=>{note=nt.value;};
+  const cp=$('#copy');if(cp)cp.onclick=()=>{const txt=`${p.t} — ${new Date().toLocaleString('nl-NL')}\n\n`+hist.filter(h=>p.n[h].k!=='end').map(h=>{const x=p.n[h];if(x.k==='q'){const nx=hist[hist.indexOf(h)+1];const o=(x.opts||[{l:'Ja',go:x.yes},{l:'Nee',go:x.no}]).find(o=>o.go===nx);return `• ${x.t} ${o?o.l:''}`;}
+      return `• ${x.t}\n`+x.steps.map((s,i)=>`   [${checks[h+i]?'x':' '}] ${s.replace(/<[^>]+>/g,'')}`).join('\n');}).join('\n')+(note?`\n\nNotitie:\n${note}`:'');
+    (navigator.clipboard?navigator.clipboard.writeText(txt):Promise.reject()).then(()=>toast('Verslag gekopieerd')).catch(()=>{const ta=document.createElement('textarea');ta.value=txt;document.body.appendChild(ta);ta.select();try{document.execCommand('copy');toast('Verslag gekopieerd');}catch(e){toast('Kopiëren lukte niet');}ta.remove();});};
+  const pr=$('#print');if(pr)pr.onclick=()=>window.print();const ag=$('#again');if(ag)ag.onclick=()=>home();
+  bindPeople();}
+
+/* ---------- wie is wie ---------- */
+function peoplePage(){cur=null;setHash('wie');main.innerHTML=`<div class="wrap"><section class="hero"><h2>Wie is wie</h2><p>Vul de namen en nummers van jullie school in. Ze worden alleen in deze browser bewaard en verschijnen daarna in elk protocol.</p></section>
+  <div class="people">${Object.entries(CONTACTS).map(([id,c])=>{const p=people[id]||{};return `<div class="person"><div class="av">${c.ic}</div><div><b>${esc(c.r)}</b><p>${esc(c.d)}</p>${c.fixed?`<span class="fixed">📞 ${esc(c.tel)}</span>`:`<input data-id="${id}" data-f="name" placeholder="Naam" value="${esc(p.name||'')}" aria-label="Naam ${esc(c.r)}"><input data-id="${id}" data-f="tel" placeholder="Telefoon of toestel" value="${esc(p.tel||'')}" aria-label="Telefoon ${esc(c.r)}">`}</div></div>`;}).join('')}</div>
+  <p class="foot"><button class="btn pri" id="pDone">Klaar</button></p></div>`;
+  $$('.person input').forEach(i=>i.oninput=()=>{const id=i.dataset.id;people[id]=people[id]||{};people[id][i.dataset.f]=i.value.trim();store.set('pw-people',people);});
+  $('#pDone').onclick=()=>{toast('Opgeslagen');home();};}
+function bindPeople(){$$('[data-people]').forEach(a=>a.onclick=e=>{e.preventDefault();peoplePage();});}
+
+$('#home').onclick=()=>home();$('#bPeople').onclick=peoplePage;
+$('#bInfo').onclick=()=>$('#info').classList.add('open');$('#infoClose').onclick=()=>$('#info').classList.remove('open');
+$('#info').onclick=e=>{if(e.target.id==='info')$('#info').classList.remove('open');};
+addEventListener('keydown',e=>{if(e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA')return;if(e.key==='Escape'){$('#info').classList.remove('open');}
+  if(cur){const n=cur.n[hist[hist.length-1]];if(n.k==='q'){const opts=n.opts||[{go:n.yes},{go:n.no}];const k=+e.key;if(k>=1&&k<=opts.length)go(opts[k-1].go);}else if(n.k==='do'&&e.key==='Enter')go(n.next);if(e.key==='Backspace')back();}});
+const h=location.hash.slice(1);if(h==='wie')peoplePage();else if(PROTOCOLS.some(p=>p.id===h))start(h);else home();
+window.__pw={start,go,home,get hist(){return hist;}};
+})();
+</script>
+</body>
+</html>
